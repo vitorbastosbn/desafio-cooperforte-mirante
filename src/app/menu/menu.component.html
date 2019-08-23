@@ -1,0 +1,16 @@
+<mat-action-list>
+    <!-- Adicione o item de menu aqui-->
+    <mat-accordion>
+        <mat-expansion-panel style="box-shadow: none">
+            <mat-expansion-panel-header style="padding-left: 16px; padding-right: 16px">
+                <mat-panel-title>Cadastro</mat-panel-title>
+            </mat-expansion-panel-header>
+            <!-- <button mat-list-item (click)="sendAnwserToFather()">Usuário</button> -->
+            <button mat-list-item (click)="sendAnwserToFather()" [routerLink]="['usuario/cadastro']">Usuario</button>
+            <button mat-list-item (click)="sendAnwserToFather()" [routerLink]="['cliente/cadastro']">Cliente</button>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <!-- <button mat-list-item (click)="sendAnwserToFather()">Item principal</button>
+    <button mat-list-item (click)="sendAnwserToFather()">Item principal</button>
+    <button mat-list-item (click)="sendAnwserToFather()">Item principal</button> -->
+</mat-action-list>

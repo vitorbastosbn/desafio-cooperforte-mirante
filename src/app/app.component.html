@@ -1,0 +1,17 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="push" [(opened)]="opened">
+    <mat-toolbar color="primary"></mat-toolbar>
+    <app-menu (sendToFather)="recieveValueFromSon($event)"></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <button mat-icon-button>
+          <mat-icon (click)="opened = !opened">menu</mat-icon>
+        </button>
+        <span class="example-spacer"></span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

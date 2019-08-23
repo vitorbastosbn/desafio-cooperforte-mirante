@@ -1,0 +1,40 @@
+<mat-spinner *ngIf="loading" mode="indeterminate" [ngClass]="{
+    'tela-pequena': isMobile,
+    'tela-grande': !isMobile
+}"></mat-spinner>
+<mat-card class="panel" *ngIf="!loading">
+    <form #f="ngForm" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <mat-card-header>
+            <mat-card-title>Cadastro</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
+                <mat-form-field fxFlex="30%">
+                    <input matInput placeholder="Usuario" formControlName="usuario">
+                    <mat-error *ngIf="formulario.get('usuario').invalid">{{getErrorMessage('usuario')}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
+                <mat-form-field fxFlex="30%">
+                    <input matInput type="password" placeholder="Senha" formControlName="senha">
+                    <mat-error *ngIf="formulario.get('senha').invalid">{{getErrorMessage('senha')}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
+                <mat-form-field fxFlex="30%">
+                    <mat-label>Perfil</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let perfil of perfis" [value]="perfil.id">
+                            {{perfil.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button type="button" mat-raised-button color="accent" (click)="onReset()">Limpar</button>
+            <button type="submit" mat-raised-button color="primary" [disabled]="!formulario.valid">Salvar</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

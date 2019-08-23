@@ -1,0 +1,37 @@
+.mat-list-base .mat-list-item .mat-list-text>*,
+.mat-list-base .mat-list-option .mat-list-text>* {
+    font-size: 8px
+}
+
+.telaGrande {
+    margin-left: 50%;
+    margin-top: 20%;
+}
+
+.telaPequena {
+    margin-left: 30%;
+    margin-top: 20%;
+}
+
+.botao-icon-sufixo {
+    height: 32px;
+    width: 32px;
+    font-size: 17px;
+}
+
+.mat-list-item {
+    height: 30px;
+}
+
+.mat-spinner {
+    position: absolute;
+    top: 45%
+}
+
+.tela-pequena {
+    left: 35%;
+}
+
+.tela-grande {
+    left: 45%;
+}

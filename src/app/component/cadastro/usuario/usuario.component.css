@@ -1,0 +1,12 @@
+.mat-spinner {
+    position: absolute;
+    top: 45%
+}
+
+.tela-pequena {
+    left: 35%;
+}
+
+.tela-grande {
+    left: 45%;
+}
