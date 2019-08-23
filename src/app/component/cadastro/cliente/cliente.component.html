@@ -12,11 +12,11 @@
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutAlign="start">
                 <mat-form-field fxFlex="80%">
                     <input matInput placeholder="Nome" formControlName="nome">
-                    <mat-error *ngIf="formulario.get('nome').invalid">{{getErrorMessage('nome')}}</mat-error>
+                    <mat-error *ngIf="formulario.get('nome').invalid">{{verificarHintErro('nome')}}</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="20%">
                     <input matInput mask="000.000.000-00" placeholder="CPF" formControlName="cpf">
-                    <mat-error *ngIf="formulario.get('cpf').invalid">{{getErrorMessage('cpf')}}</mat-error>
+                    <mat-error *ngIf="formulario.get('cpf').invalid">{{verificarHintErro('cpf')}}</mat-error>
                 </mat-form-field>
             </div>
             <div formGroupName="endereco">
@@ -24,13 +24,13 @@
                     <mat-form-field fxFlex="20%">
                         <input matInput mask="00.000-000" (blur)="consultarCep()" placeholder="CEP"
                             formControlName="cep">
-                        <mat-error *ngIf="formulario.get('endereco.cep').invalid">{{getErrorMessage('endereco.cep')}}
+                        <mat-error *ngIf="formulario.get('endereco.cep').invalid">{{verificarHintErro('endereco', 'cep')}}
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="80%">
                         <input matInput placeholder="Logradouro" formControlName="logradouro">
                         <mat-error *ngIf="formulario.get('endereco.logradouro').invalid">
-                            {{getErrorMessage('endereco.logradouro')}}
+                            {{verificarHintErro('endereco', 'logradouro')}}
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -38,24 +38,24 @@
                     <mat-form-field fxFlex="40%">
                         <input matInput placeholder="Complemento" formControlName="complemento">
                         <mat-error *ngIf="formulario.get('endereco.complemento').invalid">
-                            {{getErrorMessage('endereco.complemento')}}
+                            {{verificarHintErro('endereco', 'complemento')}}
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="20%">
                         <input matInput placeholder="Bairro" formControlName="bairro">
                         <mat-error *ngIf="formulario.get('endereco.bairro').invalid">
-                            {{getErrorMessage('endereco.bairro')}}
+                            {{verificarHintErro('endereco', 'bairro')}}
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="20%">
                         <input matInput placeholder="Cidade" formControlName="cidade">
                         <mat-error *ngIf="formulario.get('endereco.cidade').invalid">
-                            {{getErrorMessage('endereco.cidade')}}
+                            {{verificarHintErro('endereco', 'cidade')}}
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="20%">
                         <input matInput placeholder="UF" formControlName="uf">
-                        <mat-error *ngIf="formulario.get('endereco.uf').invalid">{{getErrorMessage('endereco.uf')}}
+                        <mat-error *ngIf="formulario.get('endereco.uf').invalid">{{verificarHintErro('endereco', 'uf')}}
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -68,7 +68,7 @@
                                 <input matInput mask="(00) 0000-00009" placeholder="Telefone"
                                     formControlName="telefone">
                                 <mat-error *ngIf="formulario.get('contato.telefone').invalid">
-                                    {{getErrorMessage('contato.telefone')}}
+                                    {{verificarHintErro('contato', 'telefone')}}
                                 </mat-error>
                                 <button type="button" mat-icon-button matSuffix
                                     (click)="adicionarTelefone('contato.telefone')">
@@ -96,7 +96,7 @@
                             <mat-form-field fxFlex="100%">
                                 <input matInput placeholder="Email" formControlName="email">
                                 <mat-error *ngIf="formulario.get('contato.email').invalid">
-                                    {{getErrorMessage('contato.email')}}
+                                    {{verificarHintErro('contato', 'email')}}
                                 </mat-error>
                                 <button type="button" mat-icon-button matSuffix
                                     (click)="adicionarEmail('contato.email')">

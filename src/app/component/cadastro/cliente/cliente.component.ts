@@ -1,6 +1,8 @@
-import { ClienteService } from './../../../service/cliente.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { validarListaEmailTelefone } from 'src/app/validator/validator-list';
+import { ClienteService } from './../../../service/cliente.service';
+import { getErrorMessage } from 'src/app/utils/message-error';
 
 @Component({
   selector: 'app-cliente',
@@ -8,11 +10,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
-
-  static readonly TELEFONES = 'telefones';
-  static readonly TELEFONE = 'telefone';
-  static readonly EMAILS = 'emails';
-  static readonly EMAIL = 'email';
 
   formulario: FormGroup;
   telefones: string[] = [];
@@ -60,29 +57,9 @@ export class ClienteComponent implements OnInit {
         emails: [null, Validators.minLength(1)]
       },
         {
-          validators: [this.validaTelefone, this.validaEmail]
+          validators: [validarListaEmailTelefone]
         })
     });
-  }
-
-  validaTelefone(control: any) {
-    if (control.controls !== undefined && control.controls !== null) {
-      if (control.controls[ClienteComponent.TELEFONES].value === null && control.controls[ClienteComponent.TELEFONE].value === null) {
-        control.controls[ClienteComponent.TELEFONE].setErrors({ required: true });
-        return;
-      }
-    }
-    return null;
-  }
-
-  validaEmail(control: any) {
-    if (control.controls !== undefined && control.controls !== null) {
-      if (control.controls[ClienteComponent.EMAILS].value === null && control.controls[ClienteComponent.EMAIL].value === null) {
-        control.controls[ClienteComponent.EMAIL].setErrors({ required: true });
-        return;
-      }
-    }
-    return null;
   }
 
   onSubmit() {
@@ -122,7 +99,7 @@ export class ClienteComponent implements OnInit {
   }
 
   adicionarTelefone(campo: string) {
-    if (!this.getErrorMessage(campo)) {
+    if (!this.verificarHintErro(campo)) {
       this.telefones.push(this.formulario.value.contato.telefone);
 
       this.formulario.patchValue({
@@ -143,7 +120,7 @@ export class ClienteComponent implements OnInit {
   }
 
   adicionarEmail(campo: string) {
-    if (!this.getErrorMessage(campo)) {
+    if (!this.verificarHintErro(campo)) {
       this.emails.push(this.formulario.value.contato.email);
 
       this.formulario.patchValue({
@@ -163,14 +140,12 @@ export class ClienteComponent implements OnInit {
     });
   }
 
-  getErrorMessage(campo: string) {
-    return this.formulario.get(campo).hasError('required') ? 'Este campo é obrigatório.' :
-      this.formulario.get(campo).hasError('minlength') ? 'Este valor é muito pequeno.' :
-        this.formulario.get(campo).hasError('maxlength') ? 'Este valor é muito grande.' :
-          this.formulario.get(campo).hasError('email') ? 'Formato de e-mail inválido.' :
-            this.formulario.get(campo).getError('pattern') !== null ?
-              this.formulario.get(campo).getError('pattern').requiredPattern ===
-                '^[a-zA-Z0-9áàâãéèêíïóôõöúçñ ]+$' ? 'Caracter inválido.' : '' : '';
+  verificarHintErro(campo1: string, campo2?: string): string {
+    return getErrorMessage(
+      this.formulario.controls[campo1] !== undefined ?
+        this.formulario.controls[campo1].get(campo2) !== null ? this.formulario.controls[campo1].get(campo2).errors :
+          this.formulario.controls[campo1].errors : null
+    );
   }
 
 }
